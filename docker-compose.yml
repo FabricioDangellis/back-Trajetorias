@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  database:
+    image: postgres:latest
+    container_name: trajetorias-container
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: trajetorias_db
+    volumes:
+      - ./.docker/dbdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
