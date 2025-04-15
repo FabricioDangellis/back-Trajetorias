@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only src/shared/infra/http/server.ts"
+    "dev": "ts-node-dev --transpile-only src/shared/infra/http/server.ts",
+    "typeorm": "ts-node src/shared/infra/http/database/data-source.ts",
+    "migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -d src/shared/infra/http/database/data-source.ts",
+    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d src/shared/infra/http/database/data-source.ts",
+    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d src/shared/infra/http/database/data-source.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "pg": "^8.14.1",
@@ -17,8 +22,10 @@
     "typeorm": "^0.3.22"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.0",
     "@types/node": "^22.14.0",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.3"
   }
