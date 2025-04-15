@@ -5,40 +5,43 @@ import {
     CreateDateColumn,
     DeleteDateColumn,
     BeforeInsert,
-    BeforeUpdate,
-} from 'typeorm';
-import bcrypt from 'bcryptjs';
-
-export type UserType = 'psicologo' | 'resonsavel';
-
-@Entity('users')
-export class User {
+  } from 'typeorm';
+  import { hash } from 'bcryptjs';
+  
+  export type UserType = 'psicologo' | 'responsavel';
+  
+  @Entity('users')
+  export class User {
     @PrimaryGeneratedColumn('uuid')
     id: string;
-
+  
     @Column()
-    nome: string;
-
+    name: string;
+  
     @Column({ unique: true })
     email: string;
-
+  
     @Column()
-    senha: string;
-
+    password: string;
+  
     @Column({ type: 'enum', enum: ['psicologo', 'responsavel'] })
-    tipo: UserType;
-
+    type: UserType;
+  
+    @Column({ type: 'date' })
+    birthDate: Date;
+  
+    @Column({ unique: true })
+    cpf: string;
+  
     @CreateDateColumn()
     createdAt: Date;
-
+  
     @DeleteDateColumn()
     deletedAt: Date;
-
+  
     @BeforeInsert()
-    @BeforeUpdate()
     async hashPassword() {
-        if (this.senha) {
-        this.senha = await bcrypt.hash(this.senha, 10);
-        }
+      this.password = await hash(this.password, 8);
     }
-}
+  }
+  
