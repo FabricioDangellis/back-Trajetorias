@@ -1,9 +1,11 @@
-import { ICreateUser } from "@modules/users/domain/models/ICreateUser";
-import { IUserRepository } from "@modules/users/domain/repositories/IUserRepository";
+import { ICreateUser } from "modules/users/domain/models/ICreateUser";
+import { IUserRepository } from "modules/users/domain/repositories/IUserRepository";
 import { Repository } from "typeorm";
 import { User } from "../entities/User";
-import { AppDataSource } from "@shared/infra/http/database/data-source";
+import { AppDataSource } from "shared/infra/http/database/data-source";
+import { injectable } from "tsyringe";
 
+@injectable()
 class UserRepository implements IUserRepository {
 
     private ormRepository: Repository<User>;
