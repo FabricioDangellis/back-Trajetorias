@@ -4,6 +4,8 @@ import express from 'express';
 import { AppDataSource } from './database/data-source';
 import routes from './routes/index.routes';
 import 'shared/container';
+import 'dotenv/config';
+
 
 
 AppDataSource.initialize()
