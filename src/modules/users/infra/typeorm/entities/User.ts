@@ -38,10 +38,5 @@ import {
   
     @DeleteDateColumn()
     deletedAt: Date;
-  
-    @BeforeInsert()
-    async hashPassword() {
-      this.password = await hash(this.password, 8);
-    }
   }
   

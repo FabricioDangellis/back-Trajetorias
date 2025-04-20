@@ -19,7 +19,7 @@ class CreateUserService {
         birthDate,
         cpf,
     }: ICreateUser): Promise<User> {
-        const cpfExist = await this.userRepository.findByEmail(cpf);
+        const cpfExist = await this.userRepository.findByCPF(cpf);
 
         if(cpfExist) {
             throw new Error('Usuário já cadastrado');
@@ -31,7 +31,7 @@ class CreateUserService {
             throw new Error('Email já cadastrado');
         }
 
-        const hashedPassword = await hash(password, 16);
+        const hashedPassword = await hash(password, 8);
 
         const user = await this.userRepository.create({
             name,

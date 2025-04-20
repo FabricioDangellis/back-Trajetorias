@@ -1,6 +1,5 @@
-import { User } from "@modules/users/infra/typeorm/entities/User";
+import { User } from "modules/users/infra/typeorm/entities/User";
 import { ICreateUser } from "../models/ICreateUser";
-import { IUser } from "../models/IUser";
 
 export interface IUserRepository {
     create(data: ICreateUser): Promise<User>;
