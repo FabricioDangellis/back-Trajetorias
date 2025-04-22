@@ -20,4 +20,19 @@ userRoutes.post(
     userController.create,
 );
 
+userRoutes.post(
+    '/:id',
+    celebrate({
+        [Segments.PARAMS]: Joi.object({
+            id: Joi.string().required(),
+        }),
+        [Segments.BODY]: Joi.object({
+            name: Joi.string(),
+            email: Joi.string().email(),
+            birthDate: Joi.date().iso(),
+        })
+    }),
+    userController.update,
+)
+
 export default userRoutes;
