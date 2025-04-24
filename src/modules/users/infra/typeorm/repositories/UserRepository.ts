@@ -43,6 +43,14 @@ class UserRepository implements IUserRepository {
     async findByCPF(cpf: string): Promise<User | null> {
         return await this.ormRepository.findOne({ where: { cpf } });
     }
+
+    async findById(id: string): Promise<User | null> {
+        return await this.ormRepository.findOne({where: {id} });
+    }
+
+    async save(user: User): Promise<User> {
+        return await this.ormRepository.save(user);
+    }
     
 }
 

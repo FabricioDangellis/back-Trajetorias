@@ -1,6 +1,7 @@
 import CreateUserService from 'modules/users/services/CreateUserService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import UpdateUserService from 'modules/users/services/UpdateUserService';
 
 class UserController {
 
@@ -19,6 +20,29 @@ class UserController {
         });
 
         response.json(user);
+    }
+
+    async update(request: Request, response:Response): Promise<void> {
+        const {id} = request.params;
+        const {name, email, birthDate} = request.body;
+
+        try {
+            const updateUserService = container.resolve(UpdateUserService);
+
+            const user = await updateUserService.execute({
+                id,
+                name,
+                email,
+                birthDate,
+            })
+
+            response.json(user);
+        }catch(error: any) {
+            response.status(error.statusCode || 500).json({
+                status: 'error',
+                message: error.message,
+            });
+        }
     }
 
 }
