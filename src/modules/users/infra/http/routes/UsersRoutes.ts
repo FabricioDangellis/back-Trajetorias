@@ -35,6 +35,19 @@ userRoutes.post(
     }),
     isAuthenticated,
     userController.update,
-)
+);
+
+userRoutes.delete(
+    '/:id',
+    celebrate({
+        [Segments.PARAMS]: Joi.object({
+            id: Joi.string().required(),
+        })
+    }),
+    isAuthenticated,
+    userController.delete,
+);
+
+
 
 export default userRoutes;
