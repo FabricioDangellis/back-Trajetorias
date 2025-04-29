@@ -2,6 +2,7 @@ import CreateUserService from 'modules/users/services/CreateUserService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import UpdateUserService from 'modules/users/services/UpdateUserService';
+import DeleteUserService from 'modules/users/services/DeleteUserService';
 
 class UserController {
 
@@ -35,6 +36,23 @@ class UserController {
                 email,
                 birthDate,
             })
+
+            response.json(user);
+        }catch(error: any) {
+            response.status(error.statusCode || 500).json({
+                status: 'error',
+                message: error.message,
+            });
+        }
+    }
+
+    async delete(request: Request, response: Response): Promise<void> {
+        const {id} = request.params;
+
+        try {
+            const deleteUserService = container.resolve(DeleteUserService);
+            
+            const user = await deleteUserService.execute(id);
 
             response.json(user);
         }catch(error: any) {
