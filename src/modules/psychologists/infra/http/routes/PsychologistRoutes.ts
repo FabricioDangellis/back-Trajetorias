@@ -20,3 +20,5 @@ psychologistRoutes.post(
     }),
     psychologistController.create,
 );
+
+export default psychologistRoutes;
