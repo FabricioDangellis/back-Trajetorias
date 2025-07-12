@@ -1,4 +1,5 @@
 import { Psychologists } from 'modules/psychologists/infra/typeorm/entities/Psychologists';
+import { Service } from 'modules/services/infra/typeorm/entities/Service';
 import {
   Entity,
   PrimaryGeneratedColumn,
